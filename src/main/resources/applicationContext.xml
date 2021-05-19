@@ -65,5 +65,8 @@
         <property name="basePackage" value="com.yueguang.mapper"/>
     </bean>
 
+    <!--    &lt;!&ndash;配置Handle,映射controllerTest&ndash;&gt;
+    <bean name="/controllerTest" class="com.yueguang.controller.ControllerTest"/>-->
 
+    <context:component-scan base-package="com.yueguang.controller"/>
 </beans>

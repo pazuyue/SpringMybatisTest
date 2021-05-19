@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+">
+    <context:property-placeholder location="classpath:db.properties"/>
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <!-- 连接数据库的驱动，连接字符串，用户名和登录密码-->
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+
+        <!-- 数据池中最大连接数和最小连接数-->
+        <property name="maxActive" value="${jdbc.max}"/>
+        <property name="minIdle" value="${jdbc.min}"/>
+    </bean>
+
+    <!-- 5）配置事务管理器
+        id="transactionManager" id名必须是transactionManager，不能更改
+    -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <!-- 2) 获取 SqlSessionFactory 对象，并交由 spring 管理-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+    </bean>
+
+    <!-- 3) 获取 SqlSession 对象，并交由 spring 管理  用SqlSessionTemplate得到的SqlSession可以不用我们自己操心事务的管理，以及关闭操作-->
+    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+        <!-- 给 SqlSessionTemplate 的构造函数赋值-->
+        <constructor-arg index="0" ref="sqlSessionFactory" />
+    </bean>
+
+
+    <!--基于Dao整合-->
+    <bean id="userDao" class="com.yueguang.dao.impl.UserDaoImpl">
+        <property name="SqlSessionTemplate" ref="sqlSessionTemplate"/>
+        <!--<property name="SqlSessionFactory" ref="sqlSessionFactory"/>-->
+    </bean>
+
+   <!-- 基于MapperFactoryBean的整合 userMapper
+    <bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.yueguang.mapper.UserMapper"/>
+        <property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
+    </bean>-->
+
+    <!--基于MapperScannerConfigurer的整合-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.yueguang.mapper"/>
+    </bean>
+
+
+</beans>

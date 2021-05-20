@@ -10,6 +10,7 @@
 
     <properties>
         <org.springframework.version>5.3.6</org.springframework.version>
+        <org.jackson.version>2.12.2</org.jackson.version>
     </properties>
 
     <dependencies>
@@ -97,6 +98,22 @@
             <version>1.16.10</version>
         </dependency>
 
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${org.jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${org.jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${org.jackson.version}</version>
+        </dependency>
     </dependencies>
 
 </project>

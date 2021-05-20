@@ -1,9 +1,14 @@
 package com.yueguang.controller;
 
 import com.yueguang.model.TUser;
+import com.yueguang.model.User;
+import com.yueguang.model.UserVo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -24,6 +29,22 @@ public class UserController {
         String password = user.getPassword();
         System.out.println("username="+username);
         System.out.println("password="+password);
+        return "success";
+    }
+
+    @RequestMapping("/toUserEdit")
+    public String toUserEdit(){
+        return "user_edit";
+    }
+
+    @RequestMapping("/editUsers")
+    public String editUsers(UserVo userVo){
+        List<User> userList = userVo.getUserList();
+        for (User user:userList){
+            if (user.getId()!=null){
+                System.out.println("删除id为"+user.getId()+"的用户名为"+user.getNickname());
+            }
+        }
         return "success";
     }
 }

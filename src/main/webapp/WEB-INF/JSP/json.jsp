@@ -9,7 +9,7 @@
 <html>
 <head>
     <title>测试JSON交互</title>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/JS/jquery.js"/>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/JS/jquery-1.4.2.min.js"/>
     <script type="text/javascript">
         function testJson() {
             console.log(123);
@@ -26,9 +26,8 @@
                         alert("您输入的登录名为："+data.loginname+"密码为："+data.password);
                     }
                 }
-            })
+            });
         }
-
     </script>
 </head>
 <body>

@@ -20,4 +20,17 @@
         <!-- 处理所有URL -->
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+
+    <filter>
+        <filter-name>charsetEncodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>CharsetEncoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>charsetEncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 </web-app>

@@ -23,6 +23,7 @@ public class UserController {
     @RequestMapping("/findUserById")
     @ResponseBody
     public String findUserById(Integer id, Model model){
+        System.out.println("123");
         User user = userService.findUserById(id);
         model.addAttribute("user",user);
         return user.toString();

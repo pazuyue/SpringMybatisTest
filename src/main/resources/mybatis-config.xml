@@ -9,4 +9,8 @@
         <package name="com.yueguang.model"/>
     </typeAliases>
 
+    <mappers>
+        <mapper resource="com/yueguang/mapper/UserMapper.xml"/>
+    </mappers>
+
 </configuration>

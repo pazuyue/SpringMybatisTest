@@ -2,8 +2,7 @@ package com.yueguang.model;
 
 public class User {
     private Integer id;
-    private Integer avatar;
-    private String nickname;
+    private String username;
 
     public Integer getId() {
         return id;
@@ -13,28 +12,20 @@ public class User {
         this.id = id;
     }
 
-    public Integer getAvatar() {
-        return avatar;
+
+    public String getUsername() {
+        return username;
     }
 
-    public void setAvatar(Integer avatar) {
-        this.avatar = avatar;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", avatar=" + avatar +
-                ", nickname='" + nickname + '\'' +
+                ", username=" + username +
                 '}';
     }
 }

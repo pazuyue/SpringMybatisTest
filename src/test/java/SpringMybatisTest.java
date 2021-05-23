@@ -1,7 +1,6 @@
 import com.yueguang.dao.UserDao;
-import com.yueguang.mapper.UserMapper;
+
 import com.yueguang.model.User;
-import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -23,10 +22,5 @@ public class SpringMybatisTest {
         System.out.println(user);
     }
 
-    @Test
-    public void test2(){
-        UserMapper userMapper = (UserMapper) context.getBean("userMapper");
-        User user = userMapper.findUserById(3);
-        System.out.println(user);
-    }
+
 }

@@ -3,48 +3,28 @@ package com.yueguang.controller;
 import com.yueguang.model.TUser;
 import com.yueguang.model.User;
 import com.yueguang.model.UserVo;
+import com.yueguang.servelt.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
 @Controller
 public class UserController {
 
-    /**
-     * 向注册页面跳转
-     * @return
-     */
-    @GetMapping("/toRegister")
-    public String toRegister(){
-        return "register";
-    }
+    @Autowired
+    private UserService userService;
 
-    //接收用户注册信息
-    @PostMapping("/registerUser")
-    public String registerUser(TUser user){
-        String username = user.getUsername();
-        String password = user.getPassword();
-        System.out.println("username="+username);
-        System.out.println("password="+password);
-        return "success";
-    }
-
-    @RequestMapping("/toUserEdit")
-    public String toUserEdit(){
-        return "user_edit";
-    }
-
-    @RequestMapping("/editUsers")
-    public String editUsers(UserVo userVo){
-        List<User> userList = userVo.getUserList();
-        for (User user:userList){
-            if (user.getId()!=null){
-                System.out.println("删除id为"+user.getId()+"的用户名为"+user.getNickname());
-            }
-        }
-        return "success";
+    @RequestMapping("/findUserById")
+    @ResponseBody
+    public String findUserById(Integer id, Model model){
+        User user = userService.findUserById(id);
+        model.addAttribute("user",user);
+        return user.toString();
     }
 }

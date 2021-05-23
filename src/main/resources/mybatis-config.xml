@@ -6,13 +6,7 @@
 
 
     <typeAliases>
-        <typeAlias alias="user" type="com.yueguang.model.User"></typeAlias>
+        <package name="com.yueguang.model"/>
     </typeAliases>
-
-
-    <mappers>
-        <mapper resource="com/yueguang/mapper/UserMapper.xml"/>
-    </mappers>
-
 
 </configuration>

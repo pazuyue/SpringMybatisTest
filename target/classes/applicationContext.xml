@@ -3,12 +3,11 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:tx="http://www.springframework.org/schema/tx"
-       xmlns:mvc="http://www.springframework.org/schema/mvc"
+
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/mvc
-        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+
          http://www.springframework.org/schema/aop
         http://www.springframework.org/schema/aop/spring-aop.xsd
         http://www.springframework.org/schema/tx
@@ -16,7 +15,7 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd
 ">
-    <context:property-placeholder location="classpath:db.properties"/>
+    <context:property-placeholder location="classpath:db2.properties"/>
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
         <!-- 连接数据库的驱动，连接字符串，用户名和登录密码-->
         <property name="driverClassName" value="${jdbc.driver}"/>
@@ -51,44 +50,11 @@
     </bean>
 
 
-    <!--基于Dao整合-->
-    <bean id="userDao" class="com.yueguang.dao.impl.UserDaoImpl">
-        <property name="SqlSessionTemplate" ref="sqlSessionTemplate"/>
-        <!--<property name="SqlSessionFactory" ref="sqlSessionFactory"/>-->
-    </bean>
-
-   <!-- 基于MapperFactoryBean的整合 userMapper
-    <bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-        <property name="mapperInterface" value="com.yueguang.mapper.UserMapper"/>
-        <property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
-    </bean>-->
 
     <!--基于MapperScannerConfigurer的整合-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.yueguang.mapper"/>
+        <property name="basePackage" value="com.yueguang.dao"/>
     </bean>
 
-    <!--    &lt;!&ndash;配置Handle,映射controllerTest&ndash;&gt;
-    <bean name="/controllerTest" class="com.yueguang.controller.ControllerTest"/>-->
-
-    <context:component-scan base-package="com.yueguang.controller"/>
-
-    <mvc:annotation-driven/>
-
-    <mvc:interceptors>
-        <mvc:interceptor>
-            <mvc:mapping path="/testJson"/>
-            <bean class="com.yueguang.interceptor.InterceptorOne"/>
-        </mvc:interceptor>
-    </mvc:interceptors>
-
-
-
-
-    <mvc:resources location="/WEB-INF/JS/" mapping="/JS/**" />
-
-    <bean id="viewResoler" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/JSP/"/>
-        <property name="suffix" value=".jsp"/>
-    </bean>
+    <context:component-scan base-package="com.yueguang.servelt"/>
 </beans>

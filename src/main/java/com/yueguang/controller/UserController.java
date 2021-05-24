@@ -1,8 +1,7 @@
 package com.yueguang.controller;
 
-import com.yueguang.model.TUser;
+
 import com.yueguang.model.User;
-import com.yueguang.model.UserVo;
 import com.yueguang.servelt.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -9,10 +9,9 @@
 <html>
 <head>
     <title>测试JSON交互</title>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/JS/jquery-1.4.2.min.js"/>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/JS/jquery-1.4.2.min.js"></script>
     <script type="text/javascript">
         function testJson() {
-            console.log(123);
             var loginname = $("#loginname").val();
             var password = $("#password").val();
             $.ajax({

@@ -72,7 +72,19 @@
     <bean name="/controllerTest" class="com.yueguang.controller.ControllerTest"/>-->
 
     <context:component-scan base-package="com.yueguang.controller"/>
+
     <mvc:annotation-driven/>
+
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/testJson"/>
+            <bean class="com.yueguang.interceptor.InterceptorOne"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+
+
+
     <mvc:resources location="/WEB-INF/JS/" mapping="/JS/**" />
 
     <bean id="viewResoler" class="org.springframework.web.servlet.view.InternalResourceViewResolver">

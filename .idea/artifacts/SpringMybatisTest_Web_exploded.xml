@@ -30,6 +30,10 @@
           <element id="library" level="project" name="Maven: org.springframework:spring-tx:4.3.17.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-web:5.3.6" />
           <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:5.3.6" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.12.3" />
+          <element id="library" level="project" name="Maven: org.projectlombok:lombok:1.16.10" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.12.3" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.12.3" />
         </element>
       </element>
     </root>

@@ -55,4 +55,31 @@
             );
 
     </insert>
+    <update id="updateUser" parameterType="User">
+        UPDATE t_user
+        <set>
+            registerTime=#{registerTime},
+            status=#{status},
+            <if test="userName!=null and userName!=''">
+                userName=#{userName},
+            </if>
+            <if test="password!=null and password!=''">
+                password=#{password},
+            </if>
+            <if test="tel!=null and tel!=''">
+                tel=#{tel},
+            </if>
+            <if test="roleId!=null and roleId!=''">
+                roleId=#{roleId},
+            </if>
+        </set>
+        WHERE userId=#{userId}
+    </update>
+    <delete id="delUser" parameterType="Integer">
+        DELETE  FROM t_user WHERE userId=#{userId}
+    </delete>
+
+    <update id="setUserStatus" parameterType="User">
+        UPDATE t_user SET status=#{status} WHERE userId=#{userId}
+    </update>
 </mapper>

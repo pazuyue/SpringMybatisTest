@@ -4,13 +4,15 @@
     <meta charset="UTF-8">
     <!-- import CSS -->
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/currency.css">
 </head>
 <body>
-${msg}
+
 <div id="app">
+
     <el-row>
-        <el-col :span="24">
-            <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+        <el-col :gutter="24">
+            <el-form id="ruleForm" :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm" action="${pageContext.request.contextPath}/login"  method="post">
                 <el-form-item label="名称" prop="loginName">
                     <el-input v-model="ruleForm.loginName"></el-input>
                 </el-form-item>
@@ -52,9 +54,9 @@ ${msg}
             return {
                 ruleForm: {
                     loginName: '',
-                    password: ''
-
+                    password: '',
                 },
+                errorMsg:"${msg}",
                 rules: {
                     loginName: [
                         { validator: checkloginName, trigger: 'blur' }
@@ -66,6 +68,11 @@ ${msg}
                 }
             };
         },
+        mounted: function () {
+            if (this.errorMsg!=''){
+                this.$message.error(this.errorMsg);
+            }
+        },
         methods: {
             submitForm(formName) {
                 this.$refs[formName].validate((valid) => {
@@ -73,14 +80,7 @@ ${msg}
                     if (valid) {
                         console.log('submit!'+this.ruleForm.loginName);
                         console.log('submit!'+this.ruleForm.password);
-                        $.post("${pageContext.request.contextPath}/login",
-                            {
-                                loginName:this.ruleForm.loginName,
-                                password:this.ruleForm.password
-                            },
-                            function(data,status){
-                                console.log("数据：" + data + "\n状态：" + status);
-                            });
+                        $("#ruleForm").trigger("submit")
                     } else {
                         console.log('error submit!!');
                         return false;
@@ -89,7 +89,7 @@ ${msg}
             },
             resetForm(formName) {
                 this.$refs[formName].resetFields();
-            }
+            },
         }
     })
 

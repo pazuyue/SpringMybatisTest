@@ -6,6 +6,6 @@
     <title>入门程序</title>
 </head>
 <body>
-${user.loginname}
+${loginname}
 </body>
 </html>

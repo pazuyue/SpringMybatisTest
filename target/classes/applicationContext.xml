@@ -54,22 +54,14 @@
     <!--基于Dao整合-->
     <bean id="userDao" class="com.yueguang.dao.impl.UserDaoImpl">
         <property name="SqlSessionTemplate" ref="sqlSessionTemplate"/>
-        <!--<property name="SqlSessionFactory" ref="sqlSessionFactory"/>-->
     </bean>
 
-   <!-- 基于MapperFactoryBean的整合 userMapper
-    <bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-        <property name="mapperInterface" value="com.yueguang.mapper.UserMapper"/>
-        <property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
-    </bean>-->
 
     <!--基于MapperScannerConfigurer的整合-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.yueguang.mapper"/>
     </bean>
 
-    <!--    &lt;!&ndash;配置Handle,映射controllerTest&ndash;&gt;
-    <bean name="/controllerTest" class="com.yueguang.controller.ControllerTest"/>-->
 
     <context:component-scan base-package="com.yueguang.controller"/>
     <mvc:annotation-driven/>
@@ -79,4 +71,14 @@
         <property name="prefix" value="/WEB-INF/JSP/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
+
+    <!--国际化-->
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basenames" value="message"/>
+        <property name="cacheSeconds" value="0"/>
+        <property name="defaultEncoding" value="UTF-8"/>
+    </bean>
+
+
+
 </beans>

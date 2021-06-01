@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.support.RequestContext;
 
 @Controller
 public class ModelAttributelController {
@@ -20,7 +21,9 @@ public class ModelAttributelController {
     }
 
     @RequestMapping(value = "/login2")
-    public String login2(){
+    public String login2()
+    {
+
         return "result";
     }
 }

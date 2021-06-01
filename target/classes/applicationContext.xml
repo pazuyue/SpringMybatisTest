@@ -2,6 +2,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:p="http://www.springframework.org/schema/p"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:context="http://www.springframework.org/schema/context"
@@ -64,7 +65,7 @@
 
 
     <context:component-scan base-package="com.yueguang.controller"/>
-    <mvc:annotation-driven/>
+    <mvc:annotation-driven conversion-service="conversionService"/>
     <mvc:resources location="/WEB-INF/JS/" mapping="/JS/**" />
 
     <bean id="viewResoler" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -78,7 +79,15 @@
         <property name="cacheSeconds" value="0"/>
         <property name="defaultEncoding" value="UTF-8"/>
     </bean>
-
-
-
+ <!--   &lt;!&ndash;基于HttpSession国际化&ndash;&gt;
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver"/>
+-->
+    <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
+        <property name="converters">
+            <list>
+                <bean class="com.yueguang.converter.StringToDateConverter" p:datePattern="yyyy-MM-dd"
+                />
+            </list>
+        </property>
+    </bean>
 </beans>

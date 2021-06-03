@@ -11,7 +11,7 @@
 <div id="app">
     <el-container>
         <el-header style="text-align: right; font-size: 12px">
-            <span>月光新闻发布系统</span>
+            <span><i class="el-icon-eleme"></i>月光新闻发布系统</span>
         </el-header>
         <el-main>
             <el-row>
@@ -33,8 +33,6 @@
         </el-main>
         <el-footer></el-footer>
     </el-container>
-
-
 </div>
 </body>
 <!-- import Vue before Element -->

@@ -144,7 +144,8 @@ public class UserController {
         if (user!=null){
             if (user.getStatus().equals("2")){
                 session.setAttribute("login_user",user);
-                return "main";
+                return "welcome";
+
             }else {
                 model.addAttribute("msg","账号未启用或者被禁用");
                 return "login";
@@ -158,6 +159,11 @@ public class UserController {
     public String logout(HttpSession session){
         session.invalidate();
         return "login";
+    }
+
+    @RequestMapping(value = "welcome")
+    public String welcome(){
+        return "welcome";
     }
 
 }

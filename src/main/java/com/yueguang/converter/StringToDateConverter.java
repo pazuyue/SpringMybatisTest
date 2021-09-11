@@ -19,6 +19,9 @@ public class StringToDateConverter implements Converter<String,Date> {
 
     public Date convert(String date) {
         try {
+            System.out.println("date:"+date);
+            System.out.println("datePattern:"+this.datePattern);
+
             SimpleDateFormat dateFormat = new SimpleDateFormat(this.datePattern);
             return dateFormat.parse(date);
         }catch (Exception e){

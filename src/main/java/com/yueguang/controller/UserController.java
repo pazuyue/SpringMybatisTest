@@ -1,16 +1,16 @@
 package com.yueguang.controller;
 
+import com.yueguang.converter.DateEditor;
 import com.yueguang.model.TUser;
 import com.yueguang.model.User;
 import com.yueguang.model.User2;
 import com.yueguang.model.UserVo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -53,7 +53,7 @@ public class UserController {
 
     @PostMapping("/register")
     public String register(@ModelAttribute  User2 user2, Model model){
-        System.out.println("come register"+user2.toString());
+        System.out.println("come register"+user2.getBirthday());
         model.addAttribute("user",user2);
         return "success";
     }

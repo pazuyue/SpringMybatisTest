@@ -5,7 +5,7 @@
        xmlns:p="http://www.springframework.org/schema/p"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
-       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:c="http://www.springframework.org/schema/c"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/mvc
@@ -65,7 +65,8 @@
 
 
     <context:component-scan base-package="com.yueguang.controller"/>
-    <mvc:annotation-driven conversion-service="conversionService"/>
+    <mvc:annotation-driven  conversion-service="conversionService"/>
+   <!-- <mvc:annotation-driven conversion-service="conversionService"/>-->
     <mvc:resources location="/WEB-INF/JS/" mapping="/JS/**" />
 
     <bean id="viewResoler" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -82,11 +83,21 @@
  <!--   &lt;!&ndash;基于HttpSession国际化&ndash;&gt;
     <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver"/>
 -->
-    <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
+<!--    <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
         <property name="converters">
             <list>
                 <bean class="com.yueguang.converter.StringToDateConverter" p:datePattern="yyyy-MM-dd"
                 />
+            </list>
+        </property>
+    </bean>-->
+    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <property name="formatters">
+            <list>
+               <!-- <bean class="com.yueguang.formatter.DateFormatter" c:_0="yyyy-MM-dd"/>-->
+                <bean class="org.springframework.format.datetime.DateFormatter">
+                    <property name="pattern" value="yyyy-MM-dd"/>
+                </bean>
             </list>
         </property>
     </bean>

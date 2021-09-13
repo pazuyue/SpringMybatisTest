@@ -2,9 +2,10 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:p="http://www.springframework.org/schema/p"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
-       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:c="http://www.springframework.org/schema/c"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/mvc
@@ -54,29 +55,51 @@
     <!--基于Dao整合-->
     <bean id="userDao" class="com.yueguang.dao.impl.UserDaoImpl">
         <property name="SqlSessionTemplate" ref="sqlSessionTemplate"/>
-        <!--<property name="SqlSessionFactory" ref="sqlSessionFactory"/>-->
     </bean>
 
-   <!-- 基于MapperFactoryBean的整合 userMapper
-    <bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-        <property name="mapperInterface" value="com.yueguang.mapper.UserMapper"/>
-        <property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
-    </bean>-->
 
     <!--基于MapperScannerConfigurer的整合-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.yueguang.mapper"/>
     </bean>
 
-    <!--    &lt;!&ndash;配置Handle,映射controllerTest&ndash;&gt;
-    <bean name="/controllerTest" class="com.yueguang.controller.ControllerTest"/>-->
 
-    <context:component-scan base-package="com.yueguang.controller"/>
+    <context:component-scan base-package="com.yueguang.*"/>
     <mvc:annotation-driven/>
+    <!--<mvc:annotation-driven  conversion-service="conversionService"/>-->
+   <!-- <mvc:annotation-driven conversion-service="conversionService"/>-->
     <mvc:resources location="/WEB-INF/JS/" mapping="/JS/**" />
 
     <bean id="viewResoler" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/JSP/"/>
         <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!--国际化-->
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basenames" value="message"/>
+        <property name="cacheSeconds" value="0"/>
+        <property name="defaultEncoding" value="UTF-8"/>
+    </bean>
+ <!--   &lt;!&ndash;基于HttpSession国际化&ndash;&gt;
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver"/>
+-->
+<!--    <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
+        <property name="converters">
+            <list>
+                <bean class="com.yueguang.converter.StringToDateConverter" p:datePattern="yyyy-MM-dd"
+                />
+            </list>
+        </property>
+    </bean>-->
+    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <property name="formatters">
+            <list>
+               <!-- <bean class="com.yueguang.formatter.DateFormatter" c:_0="yyyy-MM-dd"/>-->
+                <bean class="org.springframework.format.datetime.DateFormatter">
+                    <property name="pattern" value="yyyy-MM-dd"/>
+                </bean>
+            </list>
+        </property>
     </bean>
 </beans>

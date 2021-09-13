@@ -1,17 +1,30 @@
 package com.yueguang.controller;
 
+import com.yueguang.converter.DateEditor;
 import com.yueguang.model.TUser;
 import com.yueguang.model.User;
+import com.yueguang.model.User2;
 import com.yueguang.model.UserVo;
+import com.yueguang.validator.UserValidator;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.format.datetime.DateFormatter;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 @Controller
 public class UserController {
+
+    @Autowired
+    @Qualifier("userValidator")
+    private UserValidator userValidator;
 
     /**
      * 向注册页面跳转
@@ -45,6 +58,18 @@ public class UserController {
                 System.out.println("删除id为"+user.getId()+"的用户名为"+user.getNickname());
             }
         }
+        return "success";
+    }
+
+    @PostMapping("/register")
+    public String register(@ModelAttribute  User2 user2, Model model, Errors errors){
+        System.out.println("come register:"+user2);
+        model.addAttribute("user",user2);
+        userValidator.validate(user2,errors);
+        if (errors.hasErrors()){
+            return "registerForm";
+        }
+
         return "success";
     }
 }

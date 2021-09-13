@@ -7,25 +7,28 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
     <title>注册</title>
 </head>
 <body>
-<form action="register" method="post">
+<form:form modelAttribute="user2" action="register" method="post">
     <table>
         <tr>
             <td><label><spring:message code="loginname"/></label></td>
-            <td><input type="text" id="loginname" name="loginname"/></td>
+            <td><form:input path="loginname"/></td>
+            <td><form:errors path="loginname" cssStyle="color: red  "/></td>
         </tr>
         <tr>
             <td><label><spring:message code="birthday"/> </label></td>
-            <td><input type="text" id="birthday" name="birthday"></td>
+            <td><form:input path="birthday"/></td>
+            <td><form:errors path="birthday" cssStyle="color: red  "/></td>
         </tr>
         <tr>
             <td><input type="submit" value="<spring:message code="submit"/>"> </td>
         </tr>
     </table>
-</form>
+</form:form>
 </body>
 </html>

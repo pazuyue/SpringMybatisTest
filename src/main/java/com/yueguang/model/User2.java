@@ -1,10 +1,14 @@
 package com.yueguang.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
 public class User2 implements Serializable {
     private String loginname;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
 
     public String getLoginname() {

@@ -21,11 +21,5 @@
         <association property="clazz" column="clazz_id" javaType="com.yueguang.model.Clazz" select="selectClazzWithId"/>
     </resultMap>
 
-    <select id="selectClazzWithId" resultType="com.yueguang.model.Clazz">
-        select * from t_clazz where id=#{id}
-    </select>
-
-    <select id="selectStudent" resultMap="studentResultMap">
-        select * from t_student
-    </select>
+ n
 </mapper>

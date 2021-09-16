@@ -21,5 +21,4 @@
         <association property="clazz" column="clazz_id" javaType="com.yueguang.model.Clazz" select="selectClazzWithId"/>
     </resultMap>
 
- n
 </mapper>

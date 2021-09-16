@@ -55,7 +55,7 @@ public class UserController {
         List<User> userList = userVo.getUserList();
         for (User user:userList){
             if (user.getId()!=null){
-                System.out.println("删除id为"+user.getId()+"的用户名为"+user.getNickname());
+                System.out.println("删除id为"+user.getId()+"的用户名为");
             }
         }
         return "success";

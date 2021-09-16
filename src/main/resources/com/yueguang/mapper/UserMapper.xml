@@ -3,6 +3,23 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yueguang.mapper.UserMapper">
     <select id="findUserById" parameterType="Integer" resultType="user">
-        SELECT * FROM user WHERE id=#{id}
+        SELECT * FROM t_user WHERE id=#{id}
     </select>
+    <insert id="save" parameterType="com.yueguang.model.User" useGeneratedKeys="true">
+        INSERT INTO `t_user` (`name`, `sex`, `age`) VALUES (#{name}, #{sex}, #{age});
+    </insert>
+
+    <select id="slecetUser" resultType="map">
+        select * from t_user
+    </select>
+
+    <resultMap id="studentResultMap" type="com.yueguang.model.Student">
+        <id property="id" column="id" />
+        <result property="name" column="name" />
+        <result property="sex" column="sex" />
+        <result property="age" column="age" />
+        <association property="clazz" column="clazz_id" javaType="com.yueguang.model.Clazz" select="selectClazzWithId"/>
+    </resultMap>
+
+ n
 </mapper>

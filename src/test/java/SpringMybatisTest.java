@@ -1,10 +1,15 @@
 import com.yueguang.dao.UserDao;
 import com.yueguang.mapper.UserMapper;
+import com.yueguang.model.Student;
 import com.yueguang.model.User;
 import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.util.List;
+import java.util.Map;
 
 
 public class SpringMybatisTest {
@@ -28,5 +33,40 @@ public class SpringMybatisTest {
         UserMapper userMapper = (UserMapper) context.getBean("userMapper");
         User user = userMapper.findUserById(3);
         System.out.println(user);
+    }
+
+    @Test
+    public void getMybatisTest(){
+        SqlSessionFactory sqlSessionFactory = (SqlSessionFactory) context.getBean("sqlSessionFactory");
+        SqlSession sqlSession =sqlSessionFactory.openSession();
+        User user = new User(0,"admin","男",26);
+
+        int result_id =sqlSession.insert("com.yueguang.mapper.UserMapper.save",user);
+        System.out.println("result_id:"+result_id);
+
+        List<Map<String,Object>> list = sqlSession.selectList("com.yueguang.mapper.UserMapper.slecetUser");
+        System.out.println(list.toString());
+        for (Map<String,Object> row : list){
+            System.out.println(row.get("name"));
+        }
+
+        sqlSession.commit();
+        sqlSession.close();
+    }
+
+    @Test
+    public void testSelectStudentTest(){
+        SqlSessionFactory sqlSessionFactory = (SqlSessionFactory) context.getBean("sqlSessionFactory");
+        SqlSession sqlSession =sqlSessionFactory.openSession();
+
+        List<Student> studentList = sqlSession.selectList("com.yueguang.mapper.UserMapper.selectStudent");
+
+        for (Student student : studentList) {
+            System.out.println(student);
+        }
+
+        sqlSession.commit();
+        sqlSession.close();
+
     }
 }

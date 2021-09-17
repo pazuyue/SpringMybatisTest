@@ -1,5 +1,7 @@
 import com.yueguang.dao.UserDao;
+import com.yueguang.mapper.PersonMapper;
 import com.yueguang.mapper.UserMapper;
+import com.yueguang.model.Person;
 import com.yueguang.model.Student;
 import com.yueguang.model.User;
 import org.apache.ibatis.session.SqlSession;
@@ -67,6 +69,20 @@ public class SpringMybatisTest {
 
         sqlSession.commit();
         sqlSession.close();
+    }
 
+    @Test
+    public void testSelectStudentTest2(){
+        SqlSessionFactory sqlSessionFactory = (SqlSessionFactory) context.getBean("sqlSessionFactory");
+        SqlSession sqlSession =sqlSessionFactory.openSession();
+
+        PersonMapper pm = sqlSession.getMapper(PersonMapper.class);
+
+        Person p = pm.selectPersonById(1);
+
+        System.out.println(p);
+
+        sqlSession.commit();
+        sqlSession.close();
     }
 }
